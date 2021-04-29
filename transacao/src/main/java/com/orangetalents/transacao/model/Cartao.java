@@ -8,9 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class Cartao {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCartao;
-
     private String id;
 
     private String email;

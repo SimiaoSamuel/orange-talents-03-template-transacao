@@ -10,11 +10,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-public class EventoDeTransacao {
+public class Transacao {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTransacao;
-
     @NotBlank
     @Column(nullable = false)
     private String id;
@@ -37,9 +34,9 @@ public class EventoDeTransacao {
     @Column(nullable = false)
     private LocalDateTime efetivadaEm;
 
-    public EventoDeTransacao(@NotBlank String id, @NotNull BigDecimal valor,
-                             @NotNull Estabelicimento estabelecimento, @NotNull Cartao cartao,
-                             @NotNull LocalDateTime efetivadaEm) {
+    public Transacao(@NotBlank String id, @NotNull BigDecimal valor,
+                     @NotNull Estabelicimento estabelecimento, @NotNull Cartao cartao,
+                     @NotNull LocalDateTime efetivadaEm) {
         this.id = id;
         this.valor = valor;
         this.estabelecimento = estabelecimento;
@@ -47,7 +44,7 @@ public class EventoDeTransacao {
         this.efetivadaEm = efetivadaEm;
     }
 
-    public EventoDeTransacao() {
+    public Transacao() {
     }
 
     public String getId() {

@@ -1,6 +1,7 @@
-package com.orangetalents.transacao.shared;
+package com.orangetalents.transacao.shared.kafka;
 
-import com.orangetalents.transacao.model.EventoDeTransacao;
+import com.orangetalents.transacao.model.Transacao;
+import com.orangetalents.transacao.model.dto.TransacaoMessage;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -39,16 +40,16 @@ public class KafkaConfig implements KafkaListenerConfigurer {
     }
 
     @Bean
-    public ConsumerFactory<String, EventoDeTransacao> transactionConsumerFactory() {
+    public ConsumerFactory<String, TransacaoMessage> transactionConsumerFactory() {
         StringDeserializer stringDeserializer = new StringDeserializer();
-        JsonDeserializer<EventoDeTransacao> jsonDeserializer = new JsonDeserializer<>(EventoDeTransacao.class, false);
+        JsonDeserializer<TransacaoMessage> jsonDeserializer = new JsonDeserializer<>(TransacaoMessage.class, false);
 
         return new DefaultKafkaConsumerFactory<>(consumerConfigurations(), stringDeserializer, jsonDeserializer);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, EventoDeTransacao> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, EventoDeTransacao> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, TransacaoMessage> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, TransacaoMessage> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(transactionConsumerFactory());
 
         return factory;
